@@ -34,7 +34,7 @@ Now, change into the directory with the source code and compile it::
     
 Ooops.  This didn't work.   Our EC2 node is so bare-bones it doesn't have some system headers BWA assumes.
 
-    sudo apt-get install -y zlib1g-dev 
+    sudo apt-get install -y zlib1g-dev  libncurses5-dev
 
 
 Finally, move the compiled executable to a location where the operating system
