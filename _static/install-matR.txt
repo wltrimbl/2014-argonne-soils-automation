@@ -1,26 +1,44 @@
 
+Take-aways
+----------
+
+1.  R is a good investment: any quantitative analysis (visualization) at your fingertips
+
+2.  MG-RAST makes starting with R easy:  matR
+
+3.  matR interfaces easily with other R and non-R tools
+
+4.  a few examples
+
+5.  how to get started
+
+
 Install matR from GitHub (for the latest version)
 -------------------------------------------------
 
 Install R itself, first.  (go to:  http://www.r-project.org)
-
 Start R, then:
-
-> chooseCRANmirror (gr=FALSE)				# when asked, choose a USA-based option
+> chooseCRANmirror (gr=FALSE)       # when asked, choose the option nearest to you
 > install.packages ("devtools")
 > library("devtools")
-> install_github ("MG-RAST/matR")
-> q()										# when asked, answer "n"
-
+> install_github ("MG-RAST/matR", dependencies=TRUE)
+> q()                               # when asked, answer "n"
 
 Done!  Now any time you run R, you can load matR with:
-
 > library (matR)
 
-After that, you can replay today's session with:
-
+Then you can replay today's session with:
 > step.through('whyR')
 > step.through('ant')
 > step.through('simple')
-> step.through('API')
-> step.through('xxxxx')
+> step.through('API')               # use "q" to quit at the end
+
+
+Follow-Up
+---------
+If your system says something is "missing", for instance the package "RJSONIO", try:
+> install.packages("RJSONIO")
+
+Or try this:
+> library(matR)
+> dependencies()			# then follow the directions
