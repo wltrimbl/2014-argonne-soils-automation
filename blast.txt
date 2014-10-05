@@ -2,6 +2,7 @@ Basic EC2, command line, and BLAST
 ==================================
 
 Log into your cloud instance machine with SSH (described in :doc:`amazon/quickstart`) and we can start to 
+
 * get the tools
 * get the data
 * get the comparison data
@@ -15,14 +16,15 @@ You should be starting at the prompt that looks something like 'ubuntu@ip-10-98-
 
 This is now not bash on your local machine, but bash on amazon's cloud instance.
 
-First, Download and install BLAST::
+The instance we've started for you is a blank slate.  It has bash,
+but little else.  No blast, no genomes, no bwa...
+
+Now that we are in the cloud, download and install BLAST::
 
    curl -O ftp://ftp.ncbi.nih.gov/blast/executables/release/2.2.26/blast-2.2.26-x64-linux.tar.gz
    tar xzf blast-2.2.26-x64-linux.tar.gz
    sudo cp blast-2.2.26/bin/* /usr/local/bin
    sudo cp -r blast-2.2.26/data /usr/local/blast-data
-
-.. @CTB navigating NCBI
 
 Download and install some useful scripts::
 :: 
@@ -74,14 +76,21 @@ The notes from the Berkeley workshop show you how to synchronize
 high-value, output files on your instance using Dropbox.  This
 tutorial does not show off this neat feature.
 
-But we will copy the spreadsheet onto your computer using scp:
+But we will copy the spreadsheet onto your computer using scp.
 
 In a new Terminal or gitbash window (one that is NOT running SSH into
-your instance), type
+your instance), type::
 
    scp -i ~/Desktop/soils.pem ubuntu@ec2-???-???-???-???.compute-1.amazonaws.com:/mnt/blast/0104.x.NC.csv .
 
-And this will copy the output file 0104.x.NC.csv to your current directory
+(Note: there is a period at the end of this line.  It is essential.
+scp USER@HOST:DIRECTORY/FILENAME DESTINATION ) 
+
+(Why does it need to be a new terminal window?  Your first terminal window
+is busy running SSH into the cloud instance, and your cloud instance
+is not authorized to write files to your laptop.)
+
+This will copy the output file 0104.x.NC.csv to your current directory
 where you can open it, say, with excel.
 
 Reciprocal BLAST calculation
@@ -97,7 +106,7 @@ Extract reciprocal best hit::
    python /usr/local/share/ngs-scripts/blast/blast-to-ortho-csv.py ecoli0104.faa NC_000913.faa 0104.x.NC NC.x.0104 > ortho.csv
 
 This generates a file 'ortho.csv', containing the ortholog assignments and
-their annotations.
+their annotations.::
 
    scp -i ~/Desktop/soils.pem ubuntu@ec2-???-???-???-???.compute-1.amazonaws.com:/mnt/blast/ortho.csv .
 
