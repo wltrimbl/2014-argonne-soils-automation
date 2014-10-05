@@ -63,6 +63,10 @@ or, on mac:
 
 Congratulations, you now have CONTROL of your own EC2 server.
 
+We will keep these servers running for the rest of the day;
+if you want one for longer than that, you need $.06/hour 
+willingness to make it happen.  (Think about it.)
+
 Amazon Web Services reference material
 --------------------------------------
 You can find help online  configuring, managing, and otherwise using EC2's 
@@ -79,5 +83,4 @@ the original `2013 CEMI workshop at Caltech
 <http://2013-caltech-workshop.readthedocs.org/en/latest/>`__
 workshop, which includes instructions on how to start instances
 from scratch.
-
 
