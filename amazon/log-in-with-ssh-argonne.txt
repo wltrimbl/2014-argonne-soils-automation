@@ -12,13 +12,21 @@ If you are on windows and weren't here yesterday, you need to
 The network name of your new computer we gave you on a scrap
 of paper.
 
-Copy this name, and connect to that computer with ssh **with the username
-'ubuntu'** 
+The username for your instance will be "ubuntu".
 
-First, you must download the private key file from here: `soils.pem <http://www.mcs.anl.gov/~trimble/nodi/soils.zip>`__
+First, you must download the private key file from here: `soils.zip <http://www.mcs.anl.gov/~trimble/nodi/soils.zip>`__
 
-It should be a .pem file in your Downloads 
-folder.  Move it onto your desktop.
+This gives us a compressed (and encrypted) zip file.  
+
+First, we need to uncompress it.  You might be able to uncompress it 
+automatically by clicking on it and entering the password, but::
+
+    cd ~/Downloads
+    unzip soils.zip
+    
+should be enough to give you soils.pem.
+
+When you have soils.pem, move it onto your desktop.
 
 Next, start Terminal (for mac) or gitbash (for windows) and type::
  
@@ -33,18 +41,43 @@ Then type::
 (Where you need to put the address for your machine, distributed on a 
 sheet of paper, here)
 
-This command attempts to log in as user 'ubuntu' to the machine
-'ec2-???-???-???-???.compute-1.amazonaws.com' using the authentication
-key located in 'soils.pem' on your Desktop.
+This is the command that opens a bash connection to control your private
+instance in the cloud.
 
-----
+This command uses 'soils.pem' as the private key, uses ubuntu as the 
+user name, and opens an encrypted connection and a bash shell on the
+'ec2-???-???-???-???.compute-1.amazonaws.com' server.
+
+Declare victory
+---------------
 
 At the end you should see text and a prompt that look like this:
 
 .. image:: ../images/victory-win.png
    :width: 50%
 
+or, on mac:
+
 .. image:: ../images/victory-mac.png
    :width: 50%
 
 Congratulations, you now have CONTROL of your own EC2 server.
+
+Amazon Web Services reference material
+--------------------------------------
+You can find help online  configuring, managing, and otherwise using EC2's 
+interface.  
+
+* `Instance types <http://aws.amazon.com/ec2/instance-types/>`__
+* `Instance costs <http://aws.amazon.com/ec2/pricing/>`__
+
+For this workshop, we provided 40 instances that were blank
+except for the soils.pem key.  
+
+If you would like to learn about instances on your own, try 
+the original `2013 CEMI workshop at Caltech 
+<http://2013-caltech-workshop.readthedocs.org/en/latest/>`__
+workshop, which includes instructions on how to start instances
+from scratch.
+
+
