@@ -5,7 +5,7 @@
 
 Automation Workshop Welcome
 ===========================
-Welcome to the automation workshop at the 
+Welcome to the automation workshop at the
 `6th Argonne Soils Meeting <http://press3.mcs.anl.gov/asmw14/>`__.
 
 Schedule
@@ -14,7 +14,7 @@ Schedule
 ===============  =============================================================
 Day              Schedule
 ===============  =============================================================
-Friday 10/03     * 1:30pm-5:00pm:  Automating things with the shell 
+Friday 10/03     * 1:30pm-5:00pm:  Automating things with the shell  (Will Trimble)
 
                    * :doc:`novice-shell/00-intro` (What is going on?)
                    * :doc:`novice-shell/01-filedir` (cd,ls)
@@ -29,14 +29,16 @@ Saturday 10/04
                  * 9:30 MEGAN (Daniel Huson)
                  * 11:30 MG-RAST website(Folker Meyer)
                  * 12:00 MG-RAST API(Daniel Braithwaite)
-                      `install-matR.txt <_static/install-matR.txt>`__
+
+                   *   `install-matR.txt <_static/install-matR.txt>`__
+
                  * 12:30-1:30             Lunch
-                 * 1:30 KBase – metabolic models for metagenomes (Andreas Wilke)
+                 * 1:30 KBase – metabolic models for metagenomes (Chris Henry)
                  * 2:30-5:00pm Cloud computing to do more (Will Trimble)
 
                    * `Notes on cloud computing <_static/argonne-cloud-computing.pptx.pdf>`__
                    * Lecture notes on `BLAST <_static/cemi-lecture-blast.pptx.pdf>`__
-                   * Starting instances:  :doc:`amazon/quickstart`
+                   * Getting started with EC2: :doc:`amazon/log-in-with-ssh-argonne`
                    * Similarity search: :doc:`blast`
                    * (Lengthy lecture notes on `short read mapping <_static/cemi-lecture-mapping.pptx.pdf>`__)
                    * Short read mapping: :doc:`bwa_mapping`
@@ -47,12 +49,15 @@ Saturday 10/04
 Additional Resources
 --------------------
 
-These lessons were addapted from 
+These bash lessons were adapted from Software Carpentry's bash for beginners lessons.
+Software Carpentry is a nonprofit that maintains `computational training materials
+for scientists <http://software-carpentry.org/lessons.html>`__.
+
+The cloud computing lessons were adapted from
 `GED's ANGUS course <http://ged.msu.edu/angus/>`__ which is run at MSU every summer and teaches workshops
-like this.
-
-Software Carpentry maintains `computational training materials <http://software-carpentry.org/lessons.html>`__.
-
+like this.  Specifically, this is a one-afternoon abbreviation of the
+`2013 CEMI workshop at Caltech <http://2013-caltech-workshop.readthedocs.org/en/latest/>`__, which
+was a four-day course.
 
 .. * :ref:`genindex`
 .. * :ref:`modindex`
