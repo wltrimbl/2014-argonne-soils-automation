@@ -14,64 +14,46 @@ For a high-level overview, try `this NCBI review <http://www.ncbi.nlm.nih.gov/pm
 Getting the Dependencies
 ````````````````````````
 
-bwa is one of the many available read mappers. bwa is a good "reference" version 
-of a common alignment algorithm based on the Burrows-Wheeler transform; those
-of you looking to dive into a relatively thick paper on it can read about it
+bwa is one of the many available fast read mappers that uses the Burrows-Wheeler
+transform to speed up finding exact and near-exact matches in the database.
+A review can be found
 `here <http://bioinformatics.oxfordjournals.org/content/25/14/1754.short>`__.
 
-Firstly, let's download bwa::
+The `original verison of this lesson <http://2013-caltech-workshop.readthedocs.org/en/latest/bwa_mapping.html>`__
+had instructions to download, uncompress, make, and install bwa.
 
-    curl -L "http://downloads.sourceforge.net/project/bio-bwa/bwa-0.7.5a.tar.bz2?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fbio-bwa%2Ffiles%2F&ts=1379347638&use_mirror=softlayer-dal" > bwa-0.7.5a.tar.bz2
+We can get bwa on ubuntu with ::
 
-And then decompress it::
+    sudo apt-get install bwa
 
-    tar xjf bwa-0.7.5a.tar.bz2
-
-Now, change into the directory with the source code and compile it::
-
-    cd bwa-0.7.5a/
-    make
-    
-Ooops.  This didn't work.   Our EC2 node is so bare-bones it doesn't have some system headers BWA assumes.
-
-    sudo apt-get install -y zlib1g-dev  libncurses5-dev
-
-
-Finally, move the compiled executable to a location where the operating system
-can find it::
-
-    sudo cp bwa /usr/local/bin
-
-So what did we actually just do? bwa is offered as an open-source program -- that
-is, the actual code which defines its functionality is freely available. However,
-bwa is written in C, which, unlike Python, is not "interpreted." Instead, the
-source code needs to be parsed and converted into machine language which can be
-run on the processor. This allows compiled programs to run much more efficiently 
-than their interpreted counterparts, at the cost of needing to be recompiled for
-different systems. Although pre-compiled executables can be found for many programs,
-Unix programs are often distributed as source. 'make' is a program for tracking
-dependencies amongst files, and is used to manage the compilation of larger
-projects with many files.
-
-'make' is also very useful for setting up pipelines, as it is not limited to
-source files -- it can be used for any situation where one program needs to output
-of another to run. You can read about it `here <http://www.gnu.org/software/make/>`__ if you're interested, though
-it's outside the scope of this tutorial.
+This may not get us the most recent version of bwa, but the last version that was
+bundled for ubuntu.   Now we have bwa, and we didn't have to brave a grumpy sysadmin
+to install it for us.  On the cloud, you are your own sysadmin.
 
 Getting the Data
 ````````````````
+
+First, we will create a new directory to contain our bwa alignments (separate
+from our blast alignments in the previous lesson)::
+
+    cd /mnt
+    mkdir ecoli
+    cd ecoli
 
 We'll be using the data we downloaded during the reads and quality control session;
 if you missed that, you'll eventually want to run through it in :doc:`reads_and_qc`,
 but for now, you can just grab the quality-controlled data with::
 
-    cd /mnt
     curl -O https://s3.amazonaws.com/public.ged.msu.edu/SRR390202.pe.qc.fq.gz
     curl -O https://s3.amazonaws.com/public.ged.msu.edu/SRR390202.se.qc.fq.gz
-    
+
+This download takes about ten minutes to put on our instances.
+
 You'll also need a reference genome, which can be acquired with::
 
      curl -O http://ftp.ncbi.nlm.nih.gov/genomes/Bacteria/Escherichia_coli_O104_H4_2011C_3493_uid176127/NC_018658.fna
+
+which downloads the reference genome from NCBI.
 
 Mapping the Reads
 `````````````````
@@ -80,8 +62,6 @@ To speed up the demonstration, we will just map a subset of the reads rather tha
 the entire file, which is somewhat large (though small compared to many datasets).
 The head command outputs the first n lines of a file, by default 4::
 
-    mkdir /mnt/ecoli
-    cd /mnt/ecoli
     gunzip -c ../SRR390202.pe.qc.fq.gz | head -400000 > ecoli_pe.fq
     gunzip -c ../SRR390202.se.qc.fq.gz | head -400000 > ecoli_se.fq
 
@@ -89,7 +69,7 @@ We've got our reads and a reference, so we're ready to get started. First, we
 build an index of the reference genome using bwa::
 
     mv ../NC_018658.fna .
-    bwa index -a bwtsw NC_018658.fna 
+    bwa index -a bwtsw NC_018658.fna
 
 The -a flag tells bwa which indexing algorithm to use. The program will automatically
 output some files with set extensions, which the main alignment program knows the
@@ -133,7 +113,7 @@ Visualizing your Data with Tablet
 
 Copy your mapping files to your local machine :
 
-::
+:
     scp -i soils.pem ubuntu@yourinstance:/mnt/ecoli/aln.x.ecoli_NC_018658.bam.sorted.bam*  .
     scp -i soils.pem ubuntu@yourinstance/mnt/ecoli/NC_018658.fna .
 
@@ -158,6 +138,6 @@ a very good reference, and is only one contig:
 
 .. image:: images/tablet_view.png
     :width: 75%
-    
+
 You can move left and right along the contig, as well as zoom. Tablet can view
 other information like gene structure, but we won't get into that.
