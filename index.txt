@@ -40,6 +40,7 @@ Saturday 10/04
                    * Getting started with EC2: :doc:`amazon/log-in-with-ssh-argonne`
                    * Lecture notes on `BLAST <_static/cemi-lecture-blast.pptx.pdf>`__
                    * Similarity search: :doc:`blast`
+                  * (Lengthy lecture notes on `short read mapping <_static/cemi-lecture-mapping.pptx.pdf>`__)
                    * Short read mapping: :doc:`bwa_mapping`
 
 ===============  =============================================================
